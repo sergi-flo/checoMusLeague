@@ -22,7 +22,9 @@ if not int(os.environ.get("DEBUG")):
 
 # Define the Flask app and secret key for the session
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = "a"
+if not int(os.environ.get("DEBUG")):
+    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 # Define the players playing the competiton
 players = [
