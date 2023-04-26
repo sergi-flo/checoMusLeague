@@ -1,0 +1,146 @@
+styles = """
+/* -----BODY STYLES----- */
+
+/* -----TITLE STYLES----- */
+h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+  font-family: 'Gambetta', serif;
+  letter-spacing: -2px;
+  transition: 700ms ease;
+  font-variation-settings: "wght" 311;
+  margin-bottom: 0.8rem;
+  color: #11680B;
+  outline: none;
+  text-align: center;
+}
+
+h1:hover {
+  font-variation-settings: "wght" 582; 
+  letter-spacing: 1px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* NAVIGATION STYLES */
+nav {
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 5px 0;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+nav ul li {
+  display: inline-block;
+}
+nav ul li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #358938;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 10px;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all .5s;
+}
+nav ul li a:hover {
+  color: #224924;
+}
+
+nav.stroke ul li a,
+nav.fill ul li a {
+  position: relative;
+}
+
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #224924;
+  height: 1px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}
+
+nav.fill ul li a {
+  transition: all 2s;
+}
+
+/* -----TABLE STYLES----- */
+
+table {
+  margin: 0 auto;
+}
+
+th, td {
+  text-align: center;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-bottom: 5px;
+  word-wrap: break-word;
+}
+
+td[type="names"] {
+  text-align: left;
+}
+
+/* ----FORM STYLES----- */
+
+div {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+label {
+  padding-right: 5px;
+}
+
+button {
+  background-color: #11680B;
+  color: white;
+  padding: 10px 30px;
+  margin-left: 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 30px;
+  margin: 0 auto;
+  display: block;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #11680B;
+}
+
+p {
+  text-align: center;
+}
+
+"""

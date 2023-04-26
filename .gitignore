@@ -1,0 +1,5 @@
+*.log
+/myenv
+.python-version
+*.csv
+__pycache__/
