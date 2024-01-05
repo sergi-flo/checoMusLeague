@@ -1,0 +1,8 @@
+.python-version
+__pycache__/
+secrets/
+app/.env
+mysql/data
+app/logs
+app/data
+

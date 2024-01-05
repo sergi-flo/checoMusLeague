@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clasificación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ league_name }}</h1>
+    {{ navigation_bar }}
+    <h2>Clasificación Liga de Verano</h2>
+    <table>
+        <tr>
+            <td>Posición</td>
+            <td>Jugadores</td>
+            <td>ELO</td>
+            <td>Ganadas</td>
+            <td>Perdidas</td>
+            <td>Total</td>
+        </tr>
+        {% for position, player in players %}
+        <tr>
+            <td>{{ position }}</td>
+            <td type="names">{{ player.name | capitalize }}</td>
+            <td>{{ player.score }}</td>
+            <td>{{ player.wins }}</td>
+            <td>{{ player.losses }}</td>
+            <td>{{ player.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p>{{ message_update }}</p>
+
+    <form action="{{ url_for('scoreboard') }}" style="padding-top: 20px;">
+        <input type="submit" value="Back">
+    </form>
+</body>
+</html>

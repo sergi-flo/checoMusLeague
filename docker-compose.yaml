@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: webapp-checo
+    build: ./app  
+    restart: always
+    ports:
+      - "5003:5003"  # Expose Flask app on port 5003
+    env_file:
+      - ./app/.env
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./app/logs:/home/logs
+    secrets:
+      - mysql-user
+      - mysql-user-password
+      - mysql-database
+      - secret-key
+      - TOKEN
+    networks:
+      - apps-network
+
+networks:
+  apps-network:
+    external: true
+    name: webapps_network 
+
+secrets:
+  TOKEN:
+    file: ./secrets/token
+  mysql-user:
+    file: ./secrets/mysql-user
+  mysql-user-password:
+    file: ./secrets/mysql-user-password
+  mysql-database:
+    file: ./secrets/mysql-database
+  secret-key:
+    file: ./secrets/secret-key

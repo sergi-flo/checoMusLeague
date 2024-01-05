@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clasificación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ league_name }}</h1>
+    {{ navigation_bar }}
+    <h2>Clasificación Liga de Verano</h2>
+    <table>
+        <tr>
+            <td>Posición</td>
+            <td>Jugadores</td>
+            <td>ELO</td>
+            <td>Ganadas</td>
+            <td>Perdidas</td>
+            <td>Total</td>
+        </tr>
+        {% for position, player in players %}
+        <tr>
+            <td>{{ position }}</td>
+            <td type="names">{{ player.name | capitalize }}</td>
+            <td>{{ player.score }}</td>
+            <td>{{ player.wins }}</td>
+            <td>{{ player.losses }}</td>
+            <td>{{ player.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Update scores:</h2>
+    <form method="post" action="{{ url_for('scoreboard') }}">
+        <div>
+            <label for="winner1">Winner 1:</label>
+            <input type="text" id="winner1" name="winner1">
+        </div>
+        <div>
+            <label for="winner2">Winner 2:</label>
+            <input type="text" id="winner2" name="winner2">
+        </div>
+        <div>
+            <label for="loser1">Loser 1:</label>
+            <input type="text" id="loser1" name="loser1">
+        </div>
+        <div>
+            <label for="loser2">Loser 2:</label>
+            <input type="text" id="loser2" name="loser2">
+        </div>
+        <input type="submit" name="updateResults" value="Update">
+    </form>
+
+    <h2>Delete last game:</h2>
+    <form method="post" action="{{ url_for('scoreboard') }}">
+        <input type="submit" name="deleteLastGame" value="Delete">
+    </form>
+</body>
+</html>

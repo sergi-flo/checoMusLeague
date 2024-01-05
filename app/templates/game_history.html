@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ league_name }}</h1>
+    {{ navigation_bar }}
+    <h2>Historial de Partidas</h2>
+    {% if games == "Ha ocurrido algun error" %}
+    <p>{{ games }}</p>
+    {% elif season==0 %}
+    <p>No estaba implementado el sistema ELO y 
+        no se tiene un historial de partidas guardadas</p>
+    {% elif games %}
+    <table>
+        <tr>
+            <td>Fecha</td>
+            <td>Ganador 1</td>
+            <td>Ganador 2</td>
+            <td>Perdedor 1</td>
+            <td>Perdedor 2</td>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.timestamp }}</td>
+            <td>
+                {{ game.winner1 | capitalize }} ({{ game.winner1_percentage}}%) <br /> 
+                [{{game.winner1_old_elo}} > {{game.winner1_new_elo}}]
+            </td>
+            <td>
+                {{ game.winner2 | capitalize }} ({{ game.winner2_percentage}}%) <br />
+                [{{game.winner2_old_elo}} > {{game.winner2_new_elo}}]
+            </td>
+            <td>
+                {{ game.loser1 | capitalize }} ({{ game.loser1_percentage}}%) <br />
+                [{{game.loser1_old_elo}} > {{game.loser1_new_elo}}]
+            </td>
+            <td>
+                {{ game.loser2 | capitalize }} ({{ game.loser2_percentage}}%) <br /> 
+                [{{game.loser2_old_elo}} > {{game.loser2_new_elo}}]
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No se ha jugado ninguna partida</p>
+    {% endif %}
+</body>
+</html>

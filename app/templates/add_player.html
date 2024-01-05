@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Player</title>
+</head>
+<body>
+    <h2>Add a new player to the league</h2>
+    <form method="post" action="{{ url_for('add_player') }}">
+        <label for="new_player">New player:</label>
+        <input type="text" id="new_player" name="new_player">
+        <input type="submit" value="Add">
+    </form>
+    <p>{{ message_new_player }}</p>
+    <form action="{{ url_for('scoreboard') }}">
+        <input type="submit" value="Back">
+    </form>
+</body>
+</html>
