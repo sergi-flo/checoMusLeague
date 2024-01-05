@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Command to run your Flask app
-CMD sh -c "python csv_to_sql.py; gunicorn --bind 0.0.0.0:5003 wsgi:app -c gunicorn.conf.py"
+CMD sh -c "python check_for_db.py && gunicorn --bind 0.0.0.0:5003 wsgi:app -c gunicorn.conf.py"
