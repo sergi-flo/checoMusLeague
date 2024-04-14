@@ -20,6 +20,8 @@ class Season_1(Season, db.Model):
     __tablename__ = "season_1"
 class Season_2(Season, db.Model):
     __tablename__ = "season_2"
+class Season_3(Season, db.Model):
+    __tablename__ = "season_3"
 
 # Define the Game class for DB
 class Games_history(object):
@@ -67,3 +69,5 @@ class Games_history_1(Games_history, db.Model):
     __tablename__ = "games_history_1"
 class Games_history_2(Games_history, db.Model):
     __tablename__ = "games_history_2"
+class Games_history_3(Games_history, db.Model):
+    __tablename__ = "games_history_3"

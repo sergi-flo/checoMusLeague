@@ -1,15 +1,14 @@
 # Import necessary modules
 import datetime
 import os
-from flask import Flask, request, redirect, session, url_for, render_template
-from markupsafe import Markup
 
 # Import classes for DB
-from db_classes import db, Season_0, Season_1, Season_2, Games_history_1, Games_history_2
-
+from db_classes import (Games_history_1, Games_history_2, Games_history_3,
+                        Season_0, Season_1, Season_2, Season_3, db)
+from flask import Flask, redirect, render_template, request, session, url_for
+from markupsafe import Markup
 # Import get_docker_secrets to get secrets from docker
 from utils import get_docker_secrets
-
 
 # Basic logger for all the requests
 if not int(os.environ.get("DEBUG")):
@@ -39,7 +38,7 @@ db.init_app(app)
 # K is a scaling factor that determines how much ELO points can be gained or lost in a single game
 K = 33
 LEAGUE_NAME = "Checo Mus League"
-DEFAULT_SEASON = 2
+DEFAULT_SEASON = 3
 
 # Define the TOKEN where app is going to be deployed, so it is not easy to exploid and to find
 TOKEN = "a"
@@ -63,7 +62,7 @@ NAVIGATION_BAR = Markup(f"""<nav class="stroke">
 </nav>""")
 
 # dict to map names to classes:
-TABLES = {c.__name__:c for c in (Season_0, Season_1, Season_2, Games_history_1, Games_history_2)}
+TABLES = {c.__name__:c for c in (Season_0, Season_1, Season_2, Season_3, Games_history_1, Games_history_2, Games_history_3)}
 
 def read_scores(season):
     players = TABLES[f"Season_{season}"].query.order_by(TABLES[f"Season_{season}"].score.desc()).all()
