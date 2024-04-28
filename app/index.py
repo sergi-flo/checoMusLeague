@@ -68,6 +68,19 @@ def read_scores(season):
     players = TABLES[f"Season_{season}"].query.order_by(TABLES[f"Season_{season}"].score.desc()).all()
     return players
 
+def extra_points_win_ratio(player):
+    # Ratio de partidas ganadas
+    ratio_player = player.wins / player.total if player.total > 0 else 0
+    extra_points_winner1 = 0
+
+    # Factor ratio de partidas ganadas
+    if player.total > 15:
+        if ratio_player > 0.5:
+            extra_points_winner1 = 0.1 * ((ratio_player - 0.5) // 0.05)
+            if ratio_player % 0.05 != 0:
+                extra_points_winner1 += 0.1 * ((ratio_player % 0.05) / 0.05)
+    return extra_points_winner1
+
 def update_results(request_info, season):
     # Get player names
     winner1 = request_info.form['winner1'].strip().lower()
@@ -100,10 +113,22 @@ def update_results(request_info, season):
     expected_win_loser1 = 1/(10**(-((elo_loser1)-((elo_winner1+elo_winner2))/2)/400)+1)
     expected_win_loser2 = 1/(10**(-((elo_loser2)-((elo_winner1+elo_winner2))/2)/400)+1)
 
-    new_elo_winner1 = round(elo_winner1 + K * (1 - expected_win_winner1), 2)
-    new_elo_winner2 = round(elo_winner2 + K * (1 - expected_win_winner2), 2)
-    new_elo_loser1 = round(elo_loser1 + K * (0 - expected_win_loser1), 2)
-    new_elo_loser2 = round(elo_loser2 + K * (0 - expected_win_loser2), 2)
+    # calculate the extra score for the winning players
+    extra_points_winner1 = extra_points_win_ratio(db_w1)
+    extra_points_winner2 = extra_points_win_ratio(db_w2)
+
+    # calculate the max loss for the losers
+    max_loss_loser1 = min(K * expected_win_loser1, K * 0.6)
+    max_loss_loser2 = min(K * expected_win_loser2, K * 0.6)
+
+    new_elo_winner1 = round(
+        elo_winner1 + K * (1 - expected_win_winner1) * (1 + extra_points_winner1), 2
+    )
+    new_elo_winner2 = round(
+        elo_winner2 + K * (1 - expected_win_winner2) * (1 + extra_points_winner2), 2
+    )
+    new_elo_loser1 = round(elo_loser1 - max_loss_loser1, 2)
+    new_elo_loser2 = round(elo_loser2 - max_loss_loser2, 2)
 
     # Update score from players
     db_w1.score = new_elo_winner1
