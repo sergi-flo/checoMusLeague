@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 # Define the Player Class for DB
 class Season(object):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,16 +13,14 @@ class Season(object):
     total = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return '<User %s (%s%%) %sW/%sL %sT>' % (self.name, self.score, self.wins, self.losses, self.total)
-    
-class Season_0(Season, db.Model):
-    __tablename__ = "season_0"
-class Season_1(Season, db.Model):
-    __tablename__ = "season_1"
-class Season_2(Season, db.Model):
-    __tablename__ = "season_2"
-class Season_3(Season, db.Model):
-    __tablename__ = "season_3"
+        return "<User %s (%s%%) %sW/%sL %sT>" % (
+            self.name,
+            self.score,
+            self.wins,
+            self.losses,
+            self.total,
+        )
+
 
 # Define the Game class for DB
 class Games_history(object):
@@ -45,29 +44,57 @@ class Games_history(object):
     loser2_new_elo = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
-        return '<Game -> %s --- %s (%s%%)*[%s > %s]--%s (%s%%)*[%s > %s] --- %s (%s%%)*[%s > %s]--%s (%s%%)*[%s > %s]>' % (self.timestamp,
-                                                                                                                       self.winner1,
-                                                                                                                       self.winner1_percentage,
-                                                                                                                       self.winner1_old_elo,
-                                                                                                                       self.winner1_new_elo,
-                                                                                                                       self.winner2,
-                                                                                                                       self.winner2_percentage,
-                                                                                                                       self.winner2_old_elo,
-                                                                                                                       self.winner2_new_elo,
-                                                                                                                       self.winner1,
-                                                                                                                       self.loser1_percentage,
-                                                                                                                       self.loser1_old_elo,
-                                                                                                                       self.loser1_new_elo,
-                                                                                                                       self.loser2,
-                                                                                                                       self.loser2_percentage,
-                                                                                                                       self.loser2_old_elo,
-                                                                                                                       self.loser2_new_elo)
-    
+        return (
+            "<Game -> %s --- %s (%s%%)*[%s > %s]--%s (%s%%)*[%s > %s] --- %s (%s%%)*[%s > %s]--%s (%s%%)*[%s > %s]>"
+            % (
+                self.timestamp,
+                self.winner1,
+                self.winner1_percentage,
+                self.winner1_old_elo,
+                self.winner1_new_elo,
+                self.winner2,
+                self.winner2_percentage,
+                self.winner2_old_elo,
+                self.winner2_new_elo,
+                self.winner1,
+                self.loser1_percentage,
+                self.loser1_old_elo,
+                self.loser1_new_elo,
+                self.loser2,
+                self.loser2_percentage,
+                self.loser2_old_elo,
+                self.loser2_new_elo,
+            )
+        )
+
+
+class Season_0(Season, db.Model):
+    __tablename__ = "season_0"
+
+
 class Games_history_0(Games_history, db.Model):
     __tablename__ = "games_history_0"
+
+
+class Season_1(Season, db.Model):
+    __tablename__ = "season_1"
+
+
 class Games_history_1(Games_history, db.Model):
     __tablename__ = "games_history_1"
+
+
+class Season_2(Season, db.Model):
+    __tablename__ = "season_2"
+
+
 class Games_history_2(Games_history, db.Model):
     __tablename__ = "games_history_2"
+
+
+class Season_3(Season, db.Model):
+    __tablename__ = "season_3"
+
+
 class Games_history_3(Games_history, db.Model):
     __tablename__ = "games_history_3"
